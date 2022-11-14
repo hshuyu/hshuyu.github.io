@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三上悠亚</title>
+</head>
+<body style="background: pink">
+<br/><br/><br/>
+<h1 style="font-family: 华文彩云;text-align: center;font-size: 40px">欢迎注册</h1>
+<form style="font-size: 20px">
+    <table align="center" cellpadding="5px">
+        <tr>
+            <td>账号：</td>
+            <td><input type="text" name="username" value="" placeholder="请输入注册账号" size="30px"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="password" value="" placeholder="请输入注册密码" size="30px"></td>
+        </tr>
+        <tr>
+            <td>确认密码：</td>
+            <td><input type="password" name="passwords" value="" placeholder="请确认密码" size="30px"></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td>
+                <label><input type="radio" name="sex" value="man" checked/>男</label>
+                <label><input type="radio" name="sex" value="woman"/>女</label>
+            </td>
+        </tr>
+        <tr>
+            <td>爱好：</td>
+            <td>
+                <label><input type="checkbox" name="hobby" value="run"/>跑步</label>
+                <label><input type="checkbox" name="hobby" value="swimg"/>游泳</label>
+                <label><input type="checkbox" name="hobby" value="sing"/>唱歌</label>
+                <label><input type="checkbox" name="hobby" value="dance"/>跳舞</label>
+            </td>
+        </tr>
+        <tr>
+            <td>邮箱：</td>
+            <td><input type="email" name="email" placeholder="请输入注册邮箱" size="30px"></td>
+        </tr>
+        <tr>
+            <td>出生日期：</td>
+            <td><input type="date" name="date" size="20px"></td>
+        </tr>
+        <tr>
+            <td>手机号：</td>
+            <td><input type="text" name="phone" pattern="^1[358]\d{9}$" placeholder="请输入注册手机号" size="30px"></td>
+        </tr>
+        <tr>
+            <td>省份：</td>
+            <td>
+                <select name="shengfen">
+                    <option value="hunan" selected>&nbsp湖南省&nbsp</option>
+                    <option value="hubei">&nbsp湖北省&nbsp</option>
+                    <option value="guangdong">&nbsp广东省&nbsp</option>
+                    <option value="guangxi">&nbsp广西省&nbsp</option>
+                    <option value="sichuan">&nbsp四川省&nbsp</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <div style="text-align: center">
+        <input type="submit" value="&nbsp;注册&nbsp;" style="font:italic bold 25px 华文隶书;background: lightskyblue">
+        &emsp;&emsp;&emsp;&emsp;
+        <input type="reset" value="&nbsp;重置&nbsp;" style="font:italic bold 25px 华文隶书;background: lightskyblue">
+    </div>
+</form>
+</body>
+</html>
