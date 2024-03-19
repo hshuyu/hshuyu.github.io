@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+    <url>jdbc:oracle:thin:@localhost:1521:orcl</url>
+    <username>scott</username>
+    <password>123456</password>
+</config>

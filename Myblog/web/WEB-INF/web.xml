@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+           version="3.0">
+    <welcome-file-list>
+        <welcome-file>/home/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!--过滤器-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>com.hm.blog.action.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>loginAdminFilter</filter-name>
+        <filter-class>com.hm.blog.action.LoginAdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginAdminFilter</filter-name>
+        <!--        <url-pattern>/abc/*</url-pattern>-->
+        <url-pattern>/adminArticle</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginAdminFilter</filter-name>
+        <!--        <url-pattern>/abc/*</url-pattern>-->
+        <url-pattern>/loginAdminAction</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginAdminFilter</filter-name>
+        <!--        <url-pattern>/abc/*</url-pattern>-->
+        <url-pattern>/adminUser</url-pattern>
+    </filter-mapping>
+
+    <!--Servlet映射-->
+    <servlet>
+        <servlet-name>loginAdminAction</servlet-name>
+        <servlet-class>com.hm.blog.action.LoginAdminAction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginAdminAction</servlet-name>
+        <url-pattern>/loginAdminAction</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>loginAdmin</servlet-name>
+        <servlet-class>com.hm.blog.action.LoginAdmin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginAdmin</servlet-name>
+        <url-pattern>/loginAdmin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>adminArticle</servlet-name>
+        <servlet-class>com.hm.blog.action.AdminArticle</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminArticle</servlet-name>
+        <url-pattern>/adminArticle</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>adminUser</servlet-name>
+        <servlet-class>com.hm.blog.action.AdminUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminUser</servlet-name>
+        <url-pattern>/adminUser</url-pattern>
+    </servlet-mapping>
+</web-app>
