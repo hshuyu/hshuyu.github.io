@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20240625</title>
+</head>
+<body style="background: pink">
+<br/><br/><br/>
+
+<div id="content3" style="display: none">
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 80px">晚安 z Z ，小唐</h1>
+    <br>
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 30px">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;by&ensp;国防科大一个修电脑的</h1>
+</div>
+
+<div id="content1" style="display: none">
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 80px">你要睡啦，让我想想，我要说什么</h1>
+</div>
+
+<div id="content2" style="display: none">
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 80px">好吧，我想到了</h1>
+</div>
+
+<div id="content0" style="display: none">
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 80px">... 现在打开没有用啦 (￣`￣)</h1>
+</div>
+
+<div id="content00" style="display: none">
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 80px">睡前再打开好吗，现在看就没意思了 (ノへ￣、) </h1>
+</div>
+
+<div id="content11" style="display: none">
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 80px">... 夜猫子</h1>
+</div>
+
+<div id="content22" style="display: none">
+    <h1 style="font-family: 华文彩云;text-align: center;font-size: 80px">好吧，让我想想，我要说什么</h1>
+</div>
+
+</body>
+<SCRIPT type=text/javascript>
+    window.onload = function() {
+        const content0 = document.getElementById('content0');
+        const content1 = document.getElementById('content1');
+        const content2 = document.getElementById('content2');
+        const content3 = document.getElementById('content3');
+        const content00 = document.getElementById('content00');
+        const content11 = document.getElementById('content11');
+        const content22 = document.getElementById('content22');
+
+        const now = new Date();
+        const currentDay = now.getDate();
+        const currentTime = now.getHours();
+
+        if (currentDay === 25 && currentTime >= 20) {
+            content1.style.display = 'block';
+            setTimeout(() => {
+                content1.style.display = 'none';
+                content2.style.display = 'block';
+            }, 3000);
+            a();
+        } else if (currentDay === 26 && currentTime < 6) {
+            content11.style.display = 'block';
+            setTimeout(() => {
+                content11.style.display = 'none';
+                content22.style.display = 'block';
+            }, 3000);
+            aa();
+        }else if(currentDay === 25 && currentTime < 20){
+            content00.style.display = 'block';
+        }else {
+            content0.style.display = 'block';
+        }
+    };
+    function a(){
+        setTimeout(() => {
+            content2.style.display = 'none';
+            content3.style.display = 'block';
+        }, 5000);
+    }
+    function aa(){
+        setTimeout(() => {
+            content22.style.display = 'none';
+            content3.style.display = 'block';
+        }, 5000);
+    }
+</SCRIPT>
+</html>
