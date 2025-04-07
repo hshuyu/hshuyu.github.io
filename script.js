@@ -15,13 +15,25 @@ const config = {
             text: '小🌲说他饿了，你应该怎么办？',
             options: ['给他吃🍬', '给他买奶茶', '和他一起玩游戏'],
             correct: 0
+        },
+        {
+            text: '小小🌲突然说想你了，你最想怎么做？',
+            options: ['欺负他！', '发现小🌲嘴巴干了', '我去洗澡了'],
+            correct: 0
         }
     ],
-    finalText: '捕获成功！❤ 从今往后你就是我的专属小可爱啦～'
+    finalTexts: [
+        '？',
+        '你和修沟的修🐕去修沟吧！生气╬',
+        '你到底在干什莫？>︿<',
+        '~~>_<~~你不是我的小宝贝！',
+        '捕获成功！❤ 从今往后你就是我的专属小可爱啦～'
+    ]
 };
 
 // 初始化
 let currentQuestion = 0;
+let correctCount = 0;
 const container = document.getElementById('question-container');
 const resultDiv = document.getElementById('result');
 const canvas = document.getElementById('fireworks');
@@ -54,9 +66,18 @@ class Particle {
     draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        // 绘制爱心形状
+        // 动态切换爱心路径
             const heartPath = new Path2D();
-            heartPath.addPath(new Path2D('M'+(this.x-this.size)+','+(this.y+this.size)+' C'+(this.x-this.size*2)+','+(this.y-this.size*3)+' '+(this.x+this.size*2)+','+(this.y-this.size*3)+' '+(this.x+this.size)+','+(this.y+this.size)+' C'+(this.x+this.size*2)+','+(this.y-this.size*3)+' '+(this.x+this.size*4)+','+(this.y-this.size*3)+' '+(this.x+this.size*3)+','+(this.y+this.size)+' L'+this.x+','+(this.y+this.size*3)+' Z'));
+            const isBroken = this.color.includes('220');
+            const basePath = isBroken ? 
+                `M${this.x-this.size},${this.y+this.size} C${this.x-this.size*2},${this.y-this.size*3} ${this.x+this.size*2},${this.y-this.size*3} ${this.x+this.size},${this.y+this.size} ` +
+                `C${this.x+this.size*2},${this.y-this.size*6} ${this.x+this.size*4},${this.y-this.size*5} ${this.x+this.size*3},${this.y+this.size} ` +
+                `L${this.x},${this.y+this.size*3} L${this.x-this.size*2},${this.y+this.size}` :
+                `M${this.x-this.size},${this.y+this.size} C${this.x-this.size*2},${this.y-this.size*3} ${this.x+this.size*2},${this.y-this.size*3} ${this.x+this.size},${this.y+this.size} ` +
+                `C${this.x+this.size*2},${this.y-this.size*3} ${this.x+this.size*4},${this.y-this.size*3} ${this.x+this.size*3},${this.y+this.size} ` +
+                `L${this.x},${this.y+this.size*3} Z`;
+            
+            heartPath.addPath(new Path2D(basePath));
             ctx.fill(heartPath);
         ctx.fill();
     }
@@ -83,15 +104,20 @@ function showQuestion() {
 function handleAnswer(selectedIndex) {
     const correctIndex = config.questions[currentQuestion].correct;
     
+    currentQuestion++;
+    
     if (selectedIndex === correctIndex) {
-        currentQuestion++;
-        if (currentQuestion < config.questions.length) {
-            showQuestion();
-        } else {
-            showFinal();
-        }
+        correctCount++;
+    }
+    
+    if (currentQuestion < config.questions.length) {
+        showQuestion();
     } else {
-        createHearts();
+        showFinal(correctCount);
+    }
+    
+    if (selectedIndex !== correctIndex) {
+        createHearts('#70a1ff', true);
         document.querySelectorAll('button')[selectedIndex].animate([
             { transform: 'translateX(0px) scale(1)', background: 'rgba(255,255,255,0.9)' },
             { transform: 'translateX(-30px) scale(0.95)', background: '#ff4757' },
@@ -106,17 +132,27 @@ function handleAnswer(selectedIndex) {
 }
 
 // 显示最终表白
-function showFinal() {
+function showFinal(score) {
+    const finalIndex = Math.min(config.finalTexts.length - 1, Math.max(0, score));
+    const finalText = config.finalTexts[finalIndex];
+    
+    // 根据正确率触发不同特效
+    if(finalIndex === config.finalTexts.length - 1) {
+        createFireworks();
+    } else if(finalIndex >= 3) {
+        createHearts('#70a1ff');
+    } else if(finalIndex >= 1) {
+        createHearts('#ff6b6b');
+    }
+    
     container.classList.add('hidden');
     resultDiv.classList.remove('hidden');
     initCanvas();
-    typeWriter();
-    createFireworks();
+    typeWriter(finalText);
 }
 
 // 打字机效果
-function typeWriter() {
-    const text = config.finalText;
+function typeWriter(text) {
     const element = document.getElementById('typing-effect');
     let index = 0;
     
@@ -131,7 +167,8 @@ function typeWriter() {
 }
 
 // 创建爱心粒子
-function createHearts() {
+function createHearts(color = '#ff4757', isBroken = true) {
+    const heartColor = color;
     for (let i = 0; i < 15; i++) {
         const heart = document.createElement('div');
         heart.style.cssText = `
@@ -139,7 +176,8 @@ function createHearts() {
             left: ${Math.random()*100}%;
             top: ${Math.random()*100}%;
             font-size: ${Math.random()*30 + 20}px;
-            animation: heartbeat 1s infinite;
+            color: ${heartColor};
+            animation: brokenHeart 1s ease-out;
             opacity: 0;
         `;
         heart.innerHTML = '❤';
@@ -147,7 +185,7 @@ function createHearts() {
         
         heart.animate([
             { opacity: 1, transform: 'translateY(0)' },
-            { opacity: 0, transform: 'translateY(-100px)' }
+            { opacity: 0, transform: 'translateY(-100px) rotate(45deg) scale(0.5)' }
         ], {
             duration: 1500,
             easing: 'ease-out'
