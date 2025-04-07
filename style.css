@@ -1,0 +1,165 @@
+/* 开场动画样式 */
+#opening {
+    animation: openingFade 1.2s ease-out;
+    transform-origin: bottom;
+}
+
+@keyframes openingFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#start-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+#start-btn:active {
+    transform: scale(0.98);
+    filter: brightness(0.95);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    font-family: 'Microsoft YaHei', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+#options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        justify-content: flex-start;
+        padding-top: 20vh;
+    }
+}
+
+button {
+    background: rgba(255,255,255,0.9);
+    border: 2px solid #ff4757;
+    padding: 1.2rem 2rem;
+    margin: 0.8rem;
+    border-radius: 2rem;
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    cursor: pointer;
+    transition: all 0.3s;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    touch-action: manipulation;
+    min-width: 120px;
+}
+
+/* Android点击效果优化 */
+button:active {
+    transform: scale(0.98);
+    filter: brightness(0.95);
+}
+
+/* 移动端通用适配 */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    #question {
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* 小屏幕设备适配 */
+@media (max-width: 375px) {
+    button {
+        padding: 1.5rem 1rem;
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+    }
+}
+
+/* iOS系统样式覆盖 */
+@supports (-webkit-touch-callout: none) {
+    button {
+        -webkit-appearance: none;
+        border-radius: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 428px) and (min-height: 926px) {
+    .container {
+        padding: 2rem 1.5rem;
+    }
+    
+    button {
+        width: 100%;
+        padding: 1.8rem;
+        margin: 1rem 0;
+        min-height: 54px; /* 满足Material Design触摸目标要求 */
+    }
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+.hidden {
+    display: none;
+}
+
+#result {
+    position: relative;
+    z-index: 1000;
+    text-align: center;
+    padding-top: 20vh;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+#fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#typing-effect {
+    font-size: 2.5rem;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255,75,117,0.8);
+    animation: textGlow 2s ease-in-out infinite;
+    z-index: 999;
+    position: relative;
+}
+
+@keyframes textGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); filter: brightness(1.2); }
+}
